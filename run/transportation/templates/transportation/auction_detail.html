@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+
+<h1>{{auction.time_transportation}}</h1>
+<p>{{auction.start_address}}</p>
+<p>{{auction.finish_address}}</p>
+<p>{{auction.length}}</p>
+
+<p>{{auction.time_start}}</p>
+
+<p>{{auction.min_price}}</p>
+
+<p>{{auction.max_price}}</p>
+
+<p>{{auction.step.label_tag}} {{auction.step}}</p>
+
+<p>price now - {{auction.total_price}}</p>
+
+<p>{{auction.time_create}}</p>
+
+<p>{{auction.more_info}}</p>
+
+<p>{{auction.is_done}}</p>
+
+<p>{{auction.length}}</p>
+
+{% if not auction.is_underway and auction.check_start_timer_allowed %}
+<p><a href="{% url 'start_timer' auction.pk %}">start_timer</a></p>
+{% else %}
+<p><a href="{% url 'stop_timer' auction.pk %}">stop_timer</a></p>
+
+<form action="{% url 'take_step' auction.pk %}" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="БЕРУ">
+</form>
+
+{% endif %}
+
+{% endblock content %}

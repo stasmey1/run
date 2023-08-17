@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+
+<ul>
+    {% for auction in auction_list %}
+    <li><a href="{% url 'auction_detail' auction.pk %}">№{{auction.pk}} start price {{auction.min_price}}</a></li>
+    {% endfor %}
+</ul>
+
+
+
+{% endblock content %}
